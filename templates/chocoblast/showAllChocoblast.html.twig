@@ -10,6 +10,9 @@
             <p>Cible  : {{ chocoblast.target }}</p>
             <img src="/uploads/images/{{ chocoblast.target.image }}" alt="" width="50px">
             <p>Date : {{ chocoblast.createAt | date('d/m/Y') }}</p>
+            <p>{{chocoblast.status ? "True" : "False"}}
+            <a href="/chocoblast/activate/{{chocoblast.id}}"><button> Make active<button></a>
+            
         </div>
     {% endfor %}
 {% endblock %}
