@@ -9,15 +9,15 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Service\ChocoblastService;
 use App\Form\ChocoblastType;
 use App\Entity\Chocoblast;
-use App\Repository\ChocoblastRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ChocoblastController extends AbstractController
 {
-
     public function __construct(
         private readonly ChocoblastService $chocoblastService
     ) {
     }
+    
     #[Route('/chocoblast/add', name: 'app_chocoblast_add')]
     public function create(
         Request $request,
@@ -34,6 +34,7 @@ class ChocoblastController extends AbstractController
                 //ajout du chocoblast en BDD
                 $chocoblast->setStatus(false);
                 $this->chocoblastService->create($chocoblast);
+                $this->addFlash("Success", "Le chocoblast a été ajouté");
             } catch (\Throwable $th) {
                 $this->addFlash("danger", $th->getMessage());
             }
@@ -46,37 +47,31 @@ class ChocoblastController extends AbstractController
     #[Route('/chocoblast/all', name: 'app_chocoblast_all')]
     public function showAllChocoblast(): Response
     {
-        $chocoblasts = $this->chocoblastService->findActive();
+        $chocoblasts = $this->chocoblastService->findActiveOrNot(true);
 
         return $this->render('chocoblast/showAllChocoblast.html.twig', [
             'chocoblasts' => $chocoblasts,
         ]);
     }
 
-    #[Route('/chocoblast/all/enable', name: 'app_chocoblast_all')]
-    public function showAllChocoblastEnable(): Response
+    #[IsGranted('ROLE_USER')]
+    #[Route('/chocoblast/all/inactive', name: 'app_chocoblast_all_inactive')]
+    public function showAllChocoblastInactive(): Response
     {
-        $chocoblasts = $this->chocoblastService->findIsNotActive();
+        $chocoblasts = $this->chocoblastService->findActiveOrNot(false);
 
-        return $this->render('chocoblast/showAllChocoblast.html.twig', [
+        return $this->render('chocoblast/showAllChocoblastInactive.html.twig', [
             'chocoblasts' => $chocoblasts,
         ]);
     }
 
-    #[Route('/chocoblast/activate/{id}', name: 'app_chocoblast_activate')]
-    public function chocoblastActive($id): Response
+    #[IsGranted('ROLE_USER')]
+    #[Route('/chocoblast/active/{id}', name:'app_chocoblast_active')]
+    public function activeChocoblast($id): Response 
     {
-        //récupération du chocoblast
-        $chocoblasts = $this->chocoblastService->findOneBy($id);
-        //test si le chocoblast existe
-        if ($chocoblasts) {
-            //modifier le status
-            $chocoblasts->setStatus(true);
-            $this->chocoblastService->update($chocoblasts);
-            //redirige vers la connexion
-            return $this->redirectToRoute('app_chocoblast_all');
-        }
-        //si il n'existe pas on regirige vers la création de compte
-        return $this->redirectToRoute('app_register_create');
+        $chocoblast = $this->chocoblastService->findOneBy($id);
+        $chocoblast->setStatus(true);
+        $this->chocoblastService->update($chocoblast);
+        return $this->redirectToRoute('app_chocoblast_all_inactive');
     }
 }
