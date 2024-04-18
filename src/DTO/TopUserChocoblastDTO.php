@@ -1,14 +1,13 @@
 <?php
+
 namespace App\DTO;
 
-readonly class TopChocoblastAuthorDTO
-
+readonly class TopUserChocoblastDTO
 {
     public function __construct(
         public readonly string $firstname,
         public readonly string $lastname,
-        public readonly string $count
-    ){
-
+        public readonly int $count
+    ) {
     }
 }

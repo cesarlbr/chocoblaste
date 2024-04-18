@@ -84,4 +84,16 @@ class ChocoblastController extends AbstractController
             'topAuthor' => $json->getContent(),
         ]);
     }
+
+    #[Route('/chocoblast/user', name: 'app_chocoblast_user')]
+    public function getUserCount(): Response
+    {
+        $topUser = $this->chocoblastService->getCountChocoblastUser();
+        $json = $this->json($topUser);
+        return $this->render('chocoblast/topChocoUser.html.twig', [
+            'topUser' => $json->getContent(),
+        ]);
+    }
+
+
 }
