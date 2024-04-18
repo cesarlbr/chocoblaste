@@ -17,26 +17,28 @@ class ChocoblastType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title',TextType::class, [
+            ->add('title', TextType::class, [
                 'label' => 'Saisir le titre',
-                'required'=> true,
+                'required' => true,
                 'empty_data' => ''
             ])
             ->add('createAt', DateType::class, [
+                'label' => 'Choisir une date',
                 'widget' => 'single_text',
-                'html5'=> true,
-                'required'=> true
-            ] )
+                'html5' => true,
+                'required' => true
+            ])
             ->add('author', EntityType::class, [
                 'class' => User::class,
                 'autocomplete' => true,
+                'label' => 'Sélectionner l\'auteur',
             ])
             ->add('target', EntityType::class, [
                 'class' => User::class,
                 'autocomplete' => true,
+                'label' => 'Sélectionner la cible',
             ])
-            ->add('ajouter', SubmitType::class)
-        ;
+            ->add('ajouter', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
