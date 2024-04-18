@@ -1,16 +1,6 @@
-<<<<<<< HEAD
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello CommentaryController!{% endblock %}
-
-{% block body %}
-    {{form(formulaire)}}
-{% endblock %}
-=======
 {% for comment in comments %}
     <div class="comment">
         <h4>{{ comment.content }}</h4>
         <h5>Redigé le : {{ comment.createAt | date('d/m/Y') }}, {{ comment.author }}</h5>
     </div>
 {% endfor %}
->>>>>>> 322ecb007f5825a682d6d92e80cb0f129b22da5a

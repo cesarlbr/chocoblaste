@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Repository\CommentaryRepository;
 use App\Repository\ChocoblastRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ChocoblastRepository;
 
 class CommentaryService implements ServiceInterface
 {
