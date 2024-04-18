@@ -74,4 +74,15 @@ class ChocoblastController extends AbstractController
         $this->chocoblastService->update($chocoblast);
         return $this->redirectToRoute('app_chocoblast_all_inactive');
     }
+
+    #[Route('/chocoblast/test', name:'app_chocoblast_test')]
+    public function test():response{
+        dd($this->chocoblastService->getCountChocoblastAuthor());
+        $topAuthor = $this->chocoblastService->getCountChocoblastAuthor();
+        return $this->render('chocoblast/topAuthorChocoblast.html.twig',
+        [
+            'topAuthor'=> $topAuthor
+        ]
+        );
+    }
 }

@@ -58,4 +58,7 @@ class ChocoblastService implements ServiceInterface
     public function findAll(): array{
         return $this->chocoblastRepository->findAll()??throw new \Exception("Il n'y à aucun chocoblast en BDD");
     }
+    public function getCountChocoblastAuthor():array{
+        return $this->chocoblastRepository->topChocoBlastAuthor();
+    }
 }
