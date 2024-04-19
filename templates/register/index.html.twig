@@ -8,12 +8,12 @@
         <h2>Ajouter un compte</h2>
         {{ form_row(formulaire.firstname) }}
         {{ form_row(formulaire.lastname) }}
-        {{ form_row(formulaire.password) }}
         {{ form_row(formulaire.email) }}
+        {{ form_row(formulaire.password) }}
         {{ form_row(formulaire.image) }} 
         {{ form_rest(formulaire) }}
         <button type="submit">S'inscrire</button>
     {{ form_end(formulaire)}}
     {% include "_components/_toast.html.twig" %}
-    </turbo-frame>
+</turbo-frame>
 {% endblock %}

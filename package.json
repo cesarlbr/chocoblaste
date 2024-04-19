@@ -1,5 +1,5 @@
 {
-  "name": "chocoblaste",
+  "name": "chococda",
   "version": "1.0.0",
   "description": "1 - git clone url repo",
   "main": "index.js",
@@ -13,6 +13,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.7.3"
+    "cypress": "^13.8.0"
   }
 }
