@@ -20,5 +20,8 @@ describe('exemple', () => {
         cy.wait(4000)
         cy.get('p.alert').should('contain','Le compte existe deja')
     
-        }) 
+    }) 
+
+  
+    
    }) 

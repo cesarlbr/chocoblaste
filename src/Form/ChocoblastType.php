@@ -30,7 +30,7 @@ class ChocoblastType extends AbstractType
             ])
             ->add('target', EntityType::class, [
                 'class' => User::class,
-                'autocomplete' => true,
+                'autocomplete' => false,
                 'label' => 'Sélectionner la cible',
             ])
             ->add('ajouter', SubmitType::class);
